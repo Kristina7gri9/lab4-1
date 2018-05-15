@@ -54,6 +54,14 @@ print_in_binary(const void* data, size_t size) {
         }
     }
 }
+struct student {
+    char name[17];
+    int year;
+    float middlePoint;
+    uint8_t sex:1;
+    int courseValue;
+    student * starosta;
+};
 int
 main() {
 //    assert(nibble_to_hex(0x0) == '0');
@@ -85,7 +93,6 @@ main() {
     switch (y){
     case '&' :
         res = x&z;
-//        cout<<x<<" "<<y<<"  "<<z<<"=";
         print_in_hex(&x, sizeof(x));
         cout<<y<<' ';
         print_in_hex(&z, sizeof(z));
@@ -114,7 +121,6 @@ main() {
         break;
     case '^' :
         res = x^z;
-//        cout<<x<<" "<<y<<"  "<<z<<"=";
         print_in_hex(&x, sizeof(x));
         cout<<y<<' ';
         print_in_hex(&z, sizeof(z));
@@ -128,10 +134,50 @@ main() {
         print_in_binary (&res, sizeof(res));
         break;
     }
-    struct student {
-        char name[17],
-        uint16_t year,
-        float middlePoint;
-
+    student k[3]{
+            {
+                    "Tema", 2000, 0.1, 0, 7, nullptr,
+            },
+            {
+                    "Oleg", 2000, 4.1, 0, 7, &k[0],
+            },
+            {
+                    "Danya", 2000, 3.1, 0, 7, &k[0],
+            }
     };
+    cout<<"\nAddress of array:"<<&k<<'\n';
+    cout<<"Size of array:"<<sizeof(k)<<'\n';
+    cout<<"Address of element:"<<"\t Size of element:\n";
+    for (int i = 0; i < 3; i++) {
+        cout<<i<<'\t'<<&k[i]<<"\t\t"<<sizeof(k[i])<<"\n";
+    }
+    cout<<"For first elem of array:\n";
+    cout<<"Address of field:"<<"\t size of field:"<<"\t offset:\n";
+    cout<<"NAME: \t"<<&k[0].name<<"\t";
+    cout<<sizeof(k[0].name)<<"\t\t"<<offsetof(struct student, name);
+    cout<<"\n";
+    cout<<"YEAR: \t"<<&k[0].year<<"\t";
+    cout<<sizeof(k[0].year)<<"\t\t"<<offsetof(struct student, year);
+    cout<<"\n";
+    cout<<"MIDDLEPOINT: \t"<<&k[0].middlePoint<<"\t";
+    cout<<sizeof(k[0].middlePoint)<<"\t\t"<<offsetof(struct student, middlePoint);
+    cout<<"\n";
+    cout<<"COURSEVALUE: \t"<<&k[0].courseValue<<"\t";
+    cout<<sizeof(k[0].courseValue)<<"\t\t"<<offsetof(struct student, courseValue);
+    cout<<"\n";
+    cout<<"STAROSTA: \t"<<&k[0].starosta<<"\t";
+    cout<<sizeof(k[0].starosta)<<"\t\t"<<offsetof(struct student, starosta);
+    cout<<"\n";
+    cout<<"Name:\n";
+    cout<<"Binary:\n";
+    print_in_binary(&k[0].name, sizeof(k[0].name));
+    cout<<"\nHex: \n";
+    print_in_hex(&k[0].name, sizeof(k[0].name));
+    cout<<"\n";
+    cout<<"Year:\n";
+    cout<<"Binary:\n";
+    print_in_binary(&k[0].year, sizeof(k[0].year));
+    cout<<"\n Hex: \n";
+    print_in_hex(&k[0].year, sizeof(k[0].year));
+    cout<<"\n";
 }
