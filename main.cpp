@@ -241,7 +241,7 @@ main() {
         ifs.seekg (0, ifs.end);
         FILE_LENGTH = ifs.tellg();
         ifs.seekg (0, ifs.beg);
-        char * file_content = new char[FILE_LENGTH];
+        char *file_content = new char[FILE_LENGTH];
         ifs.read(file_content, FILE_LENGTH);
         ifs.close();
         
@@ -261,6 +261,7 @@ main() {
         delete[] tmp;
     }
     delete[] lastDot;
+    return 0;
     //    fgets(text, MAX_SIZE, stdin);
     //    const char* start = text;
     //    while (true) {
